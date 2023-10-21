@@ -1,0 +1,16 @@
+-- Tarefa 18: Consulta personalizada das tabelas EMPLOYEES e LOCATIONS
+
+-- Consultar funcionários com duas ou mais locações
+SELECT 
+    E.ID,
+    E.NAME,
+    E.PHONE_NUMBER,
+    E.CONTRACT_DATE,
+    PO.DESCRIPTION AS POSITION,
+    COUNT(L.ID) AS LOCATIONS_COUNT
+FROM EMPLOYEES AS E
+
+JOIN POSITIONS AS PO ON (E.POSITION_ID = PO.ID)
+JOIN LOCATIONS AS L ON (E.ID = L.EMPLOYEE_ID)
+
+GROUP BY E.NAME HAVING COUNT(L.ID) >= 2;
